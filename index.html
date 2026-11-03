@@ -5615,10 +5615,11 @@ return qrcode;
     var standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
     if (standalone || !btn) return;
     window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; btn.hidden = false; });
+    // 설치 창은 한 번만 띄울 수 있음 → 누르면 버튼을 숨기고, 브라우저가 다시 알려 주면 다시 보임(그 사이엔 주소창 설치 아이콘)
     btn.addEventListener('click', async function () {
-      if (!deferred) return;
-      try { deferred.prompt(); var c = await deferred.userChoice; if (c && c.outcome === 'accepted') btn.hidden = true; } catch (e) { /* 무시 */ }
-      deferred = null;
+      var d = deferred; deferred = null; btn.hidden = true;
+      if (!d) return;
+      try { d.prompt(); await d.userChoice; } catch (e) { /* 무시 */ }
     });
     window.addEventListener('appinstalled', function () { btn.hidden = true; });
   }
