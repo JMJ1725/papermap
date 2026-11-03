@@ -1,5 +1,5 @@
 /* 논문 지도 앱 서비스 워커: 화면은 저장해 두고(오프라인에서도 열림), 저장본(data.enc)은 새것을 먼저 받음 */
-const VERSION = 'pm-20261104-043720';
+const VERSION = 'pm-20261104-051747';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-maskable-512.png',
   './apple-touch-icon.png', './favicon-32.png', './data.enc', './version.json'];
 const FRESH = /\/(data\.enc|version\.json)$/;

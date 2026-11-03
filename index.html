@@ -1573,6 +1573,103 @@
   @media (min-width: 600px) { .paper-drawer { width: min(680px, calc(100vw - 56px)); } }
   
   @media (max-width: 599px) { .stat-pill { display: none; } }
+
+  
+  .search-pop {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0; min-width: min(420px, calc(100vw - 24px));
+    max-height: min(62vh, 520px); overflow: auto; z-index: 60; padding: 6px; text-align: left;
+    background: var(--bg-surface); border: 1px solid var(--border-strong); border-radius: 12px; box-shadow: var(--shadow-md);
+  }
+  .search-pop[hidden] { display: none; }
+  .sp-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 11px; color: var(--text-muted); padding: 2px 4px 6px 8px; }
+  .sp-all-mini { border: none; background: transparent; color: var(--accent-primary); font: inherit; font-size: 11.5px; font-weight: 600; cursor: pointer; padding: 4px 6px; border-radius: 6px; }
+  .sp-all-mini:hover { background: var(--accent-soft); }
+  .sp-item {
+    width: 100%; display: flex; gap: 9px; align-items: flex-start; padding: 7px 8px; border: none; border-radius: 8px;
+    background: transparent; text-align: left; cursor: pointer; color: var(--text-primary); font: inherit;
+  }
+  .sp-item:hover, .sp-item.active { background: var(--bg-hover); }
+  .sp-item.active { box-shadow: inset 3px 0 0 var(--c); }
+  .sp-dot { width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: var(--c); flex-shrink: 0; }
+  .sp-main { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+  .sp-tk { font-size: 13px; font-weight: 600; line-height: 1.35; }
+  .sp-t { font-size: 11.5px; color: var(--text-secondary); line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sp-sub { font-size: 11px; color: var(--text-muted); }
+  .sp-all {
+    width: 100%; margin-top: 4px; padding: 8px; border: 1px dashed var(--border-strong); border-radius: 8px; background: var(--bg-elevated);
+    color: var(--accent-primary); font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .sp-all.active, .sp-all:hover { background: var(--accent-soft); border-style: solid; }
+  .sp-all kbd { font-family: var(--font-mono); font-size: 10px; padding: 1px 5px; border: 1px solid var(--border-strong); border-radius: 4px; color: var(--text-muted); }
+  .sp-empty { padding: 12px; font-size: 12.5px; color: var(--text-muted); }
+  @media (pointer: coarse) { .sp-item, .sp-all { min-height: 44px; } .sp-all kbd, .sp-keys { display: none; } .sp-all-mini { min-height: 36px; } }
+
+  
+  .sp-ai {
+    width: 100%; margin: 0 0 6px; padding: 8px 10px; border-radius: 9px; cursor: pointer; text-align: left;
+    border: 1px solid color-mix(in srgb, var(--c-T) 35%, var(--border-subtle)); font: inherit; font-size: 12.5px; font-weight: 600;
+    color: color-mix(in srgb, var(--c-T) 70%, var(--text-primary));
+    background: linear-gradient(135deg, color-mix(in srgb, var(--c-R) 10%, var(--bg-surface)), color-mix(in srgb, var(--c-T) 12%, var(--bg-surface)));
+  }
+  .sp-ai:hover { filter: brightness(1.03); }
+  .sp-ai:disabled { opacity: .7; cursor: progress; }
+  .sp-ai-on { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 6px; padding: 6px 4px 6px 10px; border-radius: 9px;
+    font-size: 11.5px; color: var(--text-secondary); background: color-mix(in srgb, var(--c-T) 9%, var(--bg-surface)); }
+  .sp-ai-on span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sp-ai-msg { margin: 0 0 6px; padding: 6px 10px; border-radius: 8px; font-size: 11.5px; line-height: 1.45; color: #b45309; background: color-mix(in srgb, #f59e0b 10%, var(--bg-surface)); }
+  .brand-text { display: inline-flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+  .brand-sub { display: none; }
+  @media (max-width: 600px) {
+    .top-header {
+      display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "brand actions" "search search";
+      align-items: center; gap: 10px 8px; padding: 10px 14px 12px;
+    }
+    .brand-area { grid-area: brand; min-width: 0; flex-wrap: nowrap; gap: 0; }
+    .brand-logo { min-width: 0; gap: 10px; font-size: 17px; }
+    .brand-icon { width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0; box-shadow: 0 4px 12px color-mix(in srgb, var(--c-T) 30%, transparent); }
+    .brand-icon svg { width: 18px; height: 18px; }
+    .brand-pre { display: none; }
+    .brand-sub { display: block; max-width: 100%; font-size: 11.5px; font-weight: 500; letter-spacing: 0; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .brand-sub.warn { color: #d97706; }
+    .header-right { grid-area: actions; flex-wrap: nowrap; gap: 6px; }
+    .status-line { padding: 0; border: none; background: none; gap: 0; }
+    .status-line .status-dot, #statusText { display: none; }
+    .header-right .btn-nav, .header-right #reloadBtn {
+      width: 40px; height: 40px; min-height: 40px; padding: 0; gap: 0; justify-content: center; font-size: 0;
+      border-radius: 12px; border: 1px solid var(--border-subtle); background: var(--bg-surface); color: var(--text-secondary);
+    }
+    .header-right .btn-nav svg, .header-right #reloadBtn svg { width: 18px; height: 18px; }
+    .search-bar-wrap { grid-area: search; max-width: none; flex: none; width: 100%; }
+    .search-input { height: 46px; font-size: 15px; border-radius: 14px; padding-left: 40px; background: var(--bg-elevated); border-color: var(--border-subtle); }
+    .search-input:focus { background: var(--bg-surface); }
+    .search-icon { left: 14px; width: 18px; height: 18px; }
+    .search-kbd { display: none; }
+    .search-clear-btn { right: 6px; }
+    
+    .tree-toolbar { min-height: 0; padding: 0 14px; border-bottom: none; background: transparent; }
+    .tree-hint { display: none !important; }
+    .search-summary-banner:not(.active) { display: none; }
+    .search-summary-banner.active { margin: 2px 0 8px; }
+    
+    .graph-controls { left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); gap: 8px; flex-wrap: nowrap; }
+    .gc-btn { border-radius: 14px; border-color: var(--border-subtle); background: color-mix(in srgb, var(--bg-surface) 88%, transparent); box-shadow: 0 6px 18px rgba(15, 23, 42, .10); }
+    .gc-zoom { border-radius: 14px; border-color: var(--border-subtle); background: color-mix(in srgb, var(--bg-surface) 88%, transparent); box-shadow: 0 6px 18px rgba(15, 23, 42, .10); flex: 1; justify-content: space-between; }
+    #gcIndexBtn { margin-left: auto; }
+    
+    .drawer-header { padding: 12px 14px 10px; gap: 10px; }
+    .drawer-title-row { align-items: center; }
+    .drawer-branch-info { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 4px 8px; min-width: 0; flex: 1; }
+    .drawer-branch-title { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; margin: 0; }
+    .drawer-count-pill { grid-column: 1 / -1; justify-self: start; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .drawer-folder-link { grid-row: 1; grid-column: 3; font-size: 12px; white-space: nowrap; }
+    .drawer-close-btn { width: 44px; height: 44px; min-height: 44px; padding: 0; justify-content: center; border-radius: 12px; flex-shrink: 0; }
+    .drawer-close-btn span, .drawer-close-btn kbd { display: none; }
+    .drawer-close-btn::before { content: '✕'; font-size: 16px; line-height: 1; }
+    .drawer-filters { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -14px; padding: 0 14px 2px; }
+    .drawer-filters::-webkit-scrollbar { display: none; }
+    .drawer-filters .filter-select { flex: 0 0 auto; width: auto; max-width: 72vw; min-height: 38px; height: 38px; font-size: 13px; border-radius: 999px; padding-top: 0; padding-bottom: 0; }
+  }
 </style>
 <style>
   /* ---------- 설치형 앱 전용: 잠금 화면 · 설치 버튼 · 폰 설치(QR) ---------- */
@@ -1629,7 +1726,7 @@
             <path d="M12 3v18"/><path d="M12 8l6-4"/><path d="M12 13l7-4"/><path d="M12 11l-6-4"/><path d="M12 16l-7-4"/>
           </svg>
         </span>
-        <span>PaperSide 논문 지도</span>
+        <span class="brand-text"><span class="brand-title"><span class="brand-pre">PaperSide </span>논문 지도</span><span class="brand-sub" id="brandSub"></span></span>
       </div>
       <span class="stat-pill" id="headerStats"></span>
     </div>
@@ -1645,9 +1742,16 @@
         class="search-input"
         placeholder="제목·저자·키워드·DOI·요지 검색 (띄어쓰기 다중 조건)"
         aria-label="논문 검색"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded="false"
+        aria-controls="searchPop"
+        autocomplete="off"
+        enterkeyhint="search"
       />
       <button type="button" id="searchClearBtn" class="search-clear-btn" title="검색어 지우기" aria-label="검색어 지우기">✕</button>
       <kbd class="search-kbd" title="단축키 /">/</kbd>
+      <div class="search-pop" id="searchPop" role="listbox" aria-label="검색 결과 미리보기" hidden></div>
     </div>
 
     <div class="header-right">
@@ -1754,6 +1858,7 @@
         <option value="">모든 문서 종류</option>
       </select>
       <select id="sortOrder" class="filter-select" aria-label="정렬 기준">
+        <option value="rel" disabled>관련도순 (검색할 때)</option>
         <option value="yr_desc">최신 연도순</option>
         <option value="yr_asc">오래된 연도순</option>
         <option value="add_desc">최근 추가순</option>
@@ -1896,7 +2001,12 @@ function applyDB(parsed, text) {
   DATA_TEXT = text;
   PAPERS.forEach(p => {
     p._hay = [p.id, p.tk, p.t, p.au, p.jr, p.doi, p.sum, ...p.kw, ...p.pj].join(' \u0001 ').toLowerCase();
+    // 똑똑한 검색용: 칸별 원문(소문자)과 띄어쓰기·하이픈 뺀 형태
+    const F = { id: p.id, doi: p.doi, tk: p.tk, t: p.t, kw: p.kw.join(' '), au: p.au, pj: p.pj.join(' '), jr: p.jr, sum: p.sum };
+    p._n = {}; p._f = {};
+    Object.keys(F).forEach(k => { p._n[k] = normS(F[k]); p._f[k] = compactS(F[k]); });
   });
+  SEARCH_CACHE.clear();
   METRICS_CACHE.key = null;
   if (typeof GRAPH !== 'undefined') GRAPH.ready = false;
 }
@@ -1932,6 +2042,7 @@ function folderUrlOf(code) {
 /* ---------- 3. 상태 ---------- */
 const STATE = {
   searchQuery: '',
+  ai: null, // { q, concepts } — AI로 넓힌 검색(같은 검색어일 때만 씀)
   selectedNode: null, // { type: 'ROOT' | 'L1' | 'L2', code }
   expandedPapers: new Set(),
   filterPj: '',
@@ -1943,8 +2054,210 @@ const STATE = {
 function getSearchTokens(query) {
   return String(query).trim().toLowerCase().split(/\s+/).filter(Boolean);
 }
+
+/* ---------- 3-2. 똑똑한 검색 ----------
+   - 띄어쓰기·하이픈·가운뎃점 무시(3-body = 3 body = 3body)
+   - 한·영 동의어와 음역(3바디 = 3-body = three-body, 이로젼 = 침식 = erosion …)
+   - 붙여 쓴 말 나누기(3바디패터닝 → 3바디 + 패터닝)
+   - 주제 이름도 봄(패터닝 → '03 표면 패터닝·텍스처링' 가지의 논문)
+   - 모든 낱말이 다 들어간 논문이 없으면 가장 많이 맞는 논문부터(0편으로 끝나지 않게)
+   - AI로 넓히기를 누르면 Claude가 고른 말로 다시 찾음 */
+const SEP_RE = /[\s\-‐‑‒–—―_.,·:;/\\()[\]{}'"’“”+~]+/g;
+function normS(s) { return String(s || '').normalize('NFKC').toLowerCase(); }
+function compactS(s) { return normS(s).replace(SEP_RE, ''); }
+// 같은 뜻 묶음('='로 시작하면 띄어쓰기 그대로 맞춤 — 짧은 약어가 다른 낱말 속에 걸리지 않게)
+const SYN_RAW = [
+  ['3바디', '3-body', 'three-body', '삼체', '3체', 'third-body', '3바디마모'],
+  ['2바디', '2-body', 'two-body', '이체', '2체'],
+  ['패터닝', '패턴', 'patterning', 'patterned', 'pattern', '텍스처링', '텍스쳐링', '텍스처', '텍스쳐', 'texturing', 'textured', 'texture', '딤플', 'dimple', 'micro-texture', '표면 텍스처'],
+  ['이로젼', '이로전', '에로젼', '에로전', '침식', 'erosion', 'erosive', 'erodent', 'eroded'],
+  ['슬러리', 'slurry'],
+  ['마모', '마멸', 'wear', 'worn'],
+  ['연마', '연삭', '연마재', 'abrasion', 'abrasive', 'abrasives', 'grinding'],
+  ['마찰', 'friction', 'frictional'],
+  ['마찰계수', '=cof', 'coefficient of friction', 'friction coefficient'],
+  ['트라이볼로지', 'tribology', 'tribological'],
+  ['윤활', '윤활제', '윤활유', 'lubrication', 'lubricant', 'lubricated', 'lubricating'],
+  ['부식', 'corrosion', 'corrosive', 'corroded'],
+  ['트라이보부식', 'tribocorrosion', 'tribo-corrosion'],
+  ['침식부식', 'erosion-corrosion', '침식-부식'],
+  ['코팅', '피막', '피복', 'coating', 'coatings', 'coated'],
+  ['경도', 'hardness', 'vickers', '비커스'],
+  ['충돌각', '충돌 각도', '입사각', 'impact angle', 'impingement angle', 'attack angle'],
+  ['충돌속도', '입자속도', 'impact velocity', 'particle velocity', 'velocity', '속도'],
+  ['입자', 'particle', 'particles', 'grit'],
+  ['모래', '규사', '석영', 'sand', 'silica', 'quartz'],
+  ['알루미나', 'alumina', 'al2o3', '산화알루미늄'],
+  ['탄화규소', 'silicon carbide'],
+  ['하드페이싱', '하드페이스', '육성용접', '클래딩', 'hardfacing', 'hard-facing', 'overlay welding', 'weld overlay', 'cladding'],
+  ['침탄', 'carburizing', 'carburized', 'carburised', 'carburising'],
+  ['질화', 'nitriding', 'nitrided', 'nitride'],
+  ['열처리', '템퍼링', '담금질', '어닐링', 'heat treatment', 'heat-treated', 'tempering', 'quenching', 'annealing'],
+  ['피로', 'fatigue'],
+  ['구름', '구름접촉', 'rolling', 'rolling contact', 'rolling-sliding'],
+  ['베어링', 'bearing', 'bearings'],
+  ['기어', 'gear', 'gears'],
+  ['세라믹', 'ceramic', 'ceramics'],
+  ['레이저', 'laser'],
+  ['적층제조', '적층', '3d프린팅', '3d 프린팅', '3d printing', 'additive manufacturing', 'additively', 'lpbf', '=slm', 'powder bed'],
+  ['고엔트로피', '하이엔트로피', 'high entropy', 'high-entropy'],
+  ['캐비테이션', '공동현상', 'cavitation'],
+  ['수소취성', 'hydrogen embrittlement'],
+  ['미세조직', 'microstructure', 'microstructural'],
+  ['시뮬레이션', '모델링', '유한요소', '이산요소', '전산유체', 'simulation', 'modeling', 'modelling', 'cfd', 'finite element', 'discrete element'],
+  ['잔류응력', 'residual stress'],
+  ['쇼트피닝', '샷피닝', '피닝', 'shot peening', 'shot-peened', 'peening'],
+  ['용사', '플라즈마용사', 'thermal spray', 'thermal spraying', 'hvof', 'plasma spray'],
+  ['dlc', 'diamond-like carbon', 'diamond like carbon', '다이아몬드상카본'],
+  ['=ta-c', 'tetrahedral amorphous carbon'],
+  ['그래핀', 'graphene'],
+  ['나노인덴테이션', '인덴테이션', '압입', 'nanoindentation', 'nano-indentation', 'indentation'],
+  ['표면조도', '표면거칠기', '거칠기', '조도', 'roughness'],
+  ['왕복', 'reciprocating'],
+  ['핀온디스크', 'pin-on-disc', 'pin-on-disk'],
+  ['볼온디스크', 'ball-on-disc', 'ball-on-disk', 'ball-on-plate'],
+  ['블록온링', 'block-on-ring'],
+  ['슬러리포트', 'slurry pot', 'slurry-pot'],
+  ['제트', 'jet', 'air jet', 'water jet', '에어제트'],
+  ['파이프', '배관', '관로', 'pipe', 'pipeline', 'piping'],
+  ['펌프', '임펠러', 'pump', 'pumps', 'impeller'],
+  ['밸브', 'valve', 'valves'],
+  ['슈트', '라이너', 'chute', 'liner', 'liners'],
+  ['버티컬밀', '롤러밀', 'vertical mill', 'roller mill', 'vertical roller mill'],
+  ['분쇄', 'crusher', 'crushing', 'comminution'],
+  ['광산', '광물', 'mining', 'mineral'],
+  ['내마모강', 'wear-resistant steel', 'wear resistant steel', 'abrasion-resistant steel', 'abrasion resistant steel'],
+  ['하독스', 'hardox'],
+  ['고크롬주철', '고크롬', '하이크롬', '백주철', 'high chromium cast iron', 'high-chromium', 'hcci', 'white cast iron', 'hi-cr'],
+  ['주철', 'cast iron'],
+  ['스테인리스', '스테인레스', 'stainless'],
+  ['베어링강', 'suj2', '52100', 'bearing steel'],
+  ['공구강', 'tool steel', 'skd11', 'h13'],
+  ['고무', '폴리우레탄', '우레탄', 'rubber', 'elastomer', 'polyurethane'],
+  ['고분자', '플라스틱', 'polymer', 'polymeric', 'plastic', 'ptfe', 'uhmwpe'],
+  ['복합재', '복합소재', 'composite', 'composites'],
+  ['티타늄', 'titanium', 'ti6al4v', 'ti-6al-4v'],
+  ['알루미늄', 'aluminium', 'aluminum'],
+  ['니켈', '인코넬', 'nickel', 'inconel'],
+  ['초경', '텅스텐카바이드', '서멧', 'tungsten carbide', 'wc-co', 'cemented carbide', 'cermet'],
+  ['크롬', '경질크롬', 'chromium', 'chrome', 'hard chrome'],
+  ['고온', '온도', 'temperature', 'high temperature', 'elevated temperature'],
+  ['습식', '수중', '=wet', 'aqueous'],
+  ['건식', '=dry', 'dry sliding'],
+  ['리뷰', '총설', 'review'],
+  ['특허', 'patent'],
+  ['표준', '규격', 'standard', 'astm'],
+  ['기계학습', '머신러닝', '딥러닝', '인공지능', '신경망', 'machine learning', 'deep learning', 'neural network'],
+  ['풍력', 'wind turbine'],
+  ['기술동향', '동향', 'trend', 'technology trend'],
+  ['재사용', '재활용', 'reuse', 'reused', 'recycled', 'recycling'],
+  ['입도', '입자크기', 'particle size', 'size distribution'],
+  ['형상', '각진', '구형', 'shape', 'angularity', 'angular', 'spherical'],
+  ['가공경화', '변형경화', 'work hardening', 'strain hardening'],
+  ['파손', '파괴', 'failure', 'fracture'],
+  ['균열', 'crack', 'cracking'],
+  ['산화', 'oxidation', 'oxide'],
+  ['마모입자', '마멸입자', 'wear debris', 'debris'],
+];
+const SYN = SYN_RAW.map(g => g.map(f => f.startsWith('=') ? { exact: normS(f.slice(1)) } : { c: compactS(f) }).filter(f => f.c || f.exact));
+const SYN_INDEX = new Map();
+SYN.forEach((g, i) => g.forEach(f => { if (f.c) { if (!SYN_INDEX.has(f.c)) SYN_INDEX.set(f.c, []); SYN_INDEX.get(f.c).push(i); } }));
+const SYN_FORMS = [...SYN_INDEX.keys()].sort((a, b) => b.length - a.length);
+const SEARCH_CACHE = new Map();
+
+// 붙여 쓴 말: 사전 낱말로 빈틈없이 나뉘면 나눔(3바디패터닝 → 3바디, 패터닝)
+function splitCompound(c) {
+  if (SYN_INDEX.has(c) || c.length < 4) return [c];
+  const parts = [];
+  let i = 0;
+  while (i < c.length) {
+    const f = SYN_FORMS.find(x => x.length >= 2 && c.startsWith(x, i));
+    if (!f) return [c];
+    parts.push(f); i += f.length;
+  }
+  return parts.length > 1 ? parts : [c];
+}
+function conceptFromTerms(label, terms, topics) {
+  const alts = new Map();
+  terms.forEach((t, ti) => {
+    const raw = String(t || '').trim();
+    if (!raw) return;
+    const c = compactS(raw);
+    if (!c) return;
+    if (!alts.has(c)) alts.set(c, { c, own: ti === 0 });
+    const groups = new Set(SYN_INDEX.get(c) || []);
+    // 앞부분만 친 말(텍스처 → 텍스처링)도 사전에서 찾음
+    if (!groups.size && c.length >= 2) SYN_FORMS.forEach(f => { if (f.length > c.length && f.startsWith(c)) (SYN_INDEX.get(f) || []).forEach(g => groups.add(g)); });
+    groups.forEach(gi => SYN[gi].forEach(f => { const k = f.c || '=' + f.exact; if (!alts.has(k)) alts.set(k, { ...f, own: false }); }));
+  });
+  const k = { label, alts: [...alts.values()], topics: new Set(topics || []) };
+  // 주제 이름에 들어 있는 말이면 그 가지의 논문도 맞는 것으로(약하게)
+  [...TAX.L1, ...TAX.L2].forEach(tp => {
+    const nc = compactS(tp.name);
+    if (k.alts.some(a => a.c && a.c.length >= 2 && nc.includes(a.c))) k.topics.add(tp.code);
+  });
+  return k;
+}
+function conceptScore(p, k) {
+  let best = 0;
+  for (const a of k.alts) {
+    const w = a.own ? 1 : 0.85;
+    const S = a.c ? p._f : p._n, q = a.c || a.exact;
+    if (S.id === q || (S.doi && S.doi === q)) return 50;
+    let v = 0;
+    if (S.tk.includes(q)) v = S.tk.startsWith(q) ? 8 : 6;
+    else if (S.t.includes(q)) v = 5;
+    else if (S.kw.includes(q) || S.au.includes(q)) v = 4;
+    else if (S.pj.includes(q)) v = 2;
+    else if (S.jr.includes(q) || S.sum.includes(q) || S.doi.includes(q) || S.id.includes(q)) v = 1;
+    if (v * w > best) best = v * w;
+  }
+  if (!best && (k.topics.has(p.l1) || (p.l2 && k.topics.has(p.l2)))) best = 1.5;
+  return best;
+}
+// 검색어 → { concepts, partial, ai, match(p), score(p), terms }
+function searchEngine(tokens) {
+  const q = tokens.join(' ');
+  const ai = STATE.ai && STATE.ai.q === q ? STATE.ai : null;
+  const key = q + (ai ? '\u0002ai' : '');
+  if (SEARCH_CACHE.has(key)) return SEARCH_CACHE.get(key);
+  let concepts = [];
+  if (ai) concepts = ai.concepts.map(c => conceptFromTerms(c.label, c.terms, c.topics));
+  else {
+    // 띄어 쓴 말이 사전의 한 낱말이면 합침('3 body' → 3body, 'pin on disc' → pinondisc)
+    const toks = tokens.map(compactS).filter(Boolean), merged = [];
+    for (let i = 0; i < toks.length; i++) {
+      let took = 1;
+      for (let n = Math.min(4, toks.length - i); n >= 2; n--) { const j = toks.slice(i, i + n).join(''); if (SYN_INDEX.has(j)) { merged.push(j); took = n; break; } }
+      if (took === 1) merged.push(toks[i]);
+      i += took - 1;
+    }
+    merged.forEach(c => splitCompound(c).forEach(part => concepts.push(conceptFromTerms(part, [part]))));
+  }
+  const res = new Map();
+  let best = 0;
+  if (concepts.length) PAPERS.forEach(p => {
+    let n = 0, s = 0;
+    concepts.forEach(k => { const v = conceptScore(p, k); if (v > 0) { n++; s += v; } });
+    if (n) { res.set(p, { n, s }); if (n > best) best = n; }
+  });
+  const need = concepts.length;
+  const full = need > 0 && [...res.values()].some(r => r.n === need);
+  const thr = full ? need : Math.max(1, best);
+  const terms = [];
+  concepts.forEach(k => k.alts.forEach(a => { const t = a.c || a.exact; if (t && t.length >= 2 && terms.length < 60) terms.push(a); }));
+  const eng = {
+    concepts, ai: !!ai, partial: !full && best > 0, need, best,
+    match: p => { const r = res.get(p); return !!r && r.n >= thr; },
+    score: p => { const r = res.get(p); return r ? r.n * 100 + r.s + (p.yr || 0) / 10000 : 0; },
+    terms
+  };
+  if (SEARCH_CACHE.size > 50) SEARCH_CACHE.clear();
+  SEARCH_CACHE.set(key, eng);
+  return eng;
+}
 function matchesSearch(p, tokens) {
-  return !tokens.length || tokens.every(tok => p._hay.includes(tok));
+  return !tokens.length || searchEngine(tokens).match(p);
 }
 function matchesFilters(p) {
   if (STATE.filterPj === '__none') { if (p.pj.length) return false; }
@@ -1956,7 +2269,7 @@ function matchesFilters(p) {
 // 검색어·데이터가 같으면 다시 계산하지 않음
 const METRICS_CACHE = { key: null, value: null };
 function computeMetrics() {
-  const key = STATE.searchQuery + '\u0001' + PAPERS.length + '\u0001' + DATA_TEXT.length;
+  const key = STATE.searchQuery + '\u0001' + PAPERS.length + '\u0001' + DATA_TEXT.length + '\u0001' + (STATE.ai ? STATE.ai.q : '');
   if (METRICS_CACHE.key === key && METRICS_CACHE.papers === PAPERS) return METRICS_CACHE.value;
   const tokens = getSearchTokens(STATE.searchQuery);
   const isSearching = tokens.length > 0;
@@ -1980,7 +2293,8 @@ function computeMetrics() {
   const value = {
     totalCount: PAPERS.length, totalMatched, isSearching, tokens, totalByL1, totalByL2, matchByL1, matchByL2,
     maxL1Count: Math.max(1, ...Object.values(totalByL1)), maxL2Count: Math.max(1, ...Object.values(totalByL2)),
-    pjCounts, noTag, dtCounts, latestAdd, hl: buildHighlighter(tokens)
+    pjCounts, noTag, dtCounts, latestAdd, hl: buildHighlighter(tokens),
+    engine: isSearching ? searchEngine(tokens) : null
   };
   METRICS_CACHE.key = key; METRICS_CACHE.papers = PAPERS; METRICS_CACHE.value = value;
   return value;
@@ -1991,9 +2305,15 @@ function inNode(p, node) {
   if (node.type === 'L1') return p.l1 === node.code;
   return p.l2 === node.code;
 }
+// 검색 관련도: 맞는 낱말 수 > 한글 제목 > 원제목 > 키워드·저자 > 저널·요지(ID·DOI가 통째로 같으면 맨 위), 같으면 최신 연도 먼저
+function scorePaper(p, tokens) { return searchEngine(tokens).score(p); }
 function getFilteredPapersForBranch(node, metrics) {
   if (!node) return [];
   const subset = PAPERS.filter(p => inNode(p, node) && matchesSearch(p, metrics.tokens) && matchesFilters(p));
+  if (STATE.sortOrder === 'rel' && metrics.isSearching) {
+    const sc = new Map(subset.map(p => [p, scorePaper(p, metrics.tokens)]));
+    return subset.sort((a, b) => sc.get(b) - sc.get(a) || a.id.localeCompare(b.id));
+  }
   const yr = p => p.yr || 0;
   const cmp = {
     yr_desc: (a, b) => yr(b) - yr(a) || a.id.localeCompare(b.id),
@@ -2001,7 +2321,7 @@ function getFilteredPapersForBranch(node, metrics) {
     add_desc: (a, b) => b.add.localeCompare(a.add) || yr(b) - yr(a),
     au_asc: (a, b) => (a.au || '￿').localeCompare(b.au || '￿', 'ko') || yr(b) - yr(a),
     tk_asc: (a, b) => a.tk.localeCompare(b.tk, 'ko')
-  }[STATE.sortOrder];
+  }[STATE.sortOrder === 'rel' ? 'yr_desc' : STATE.sortOrder];
   if (cmp) subset.sort(cmp);
   return subset;
 }
@@ -2013,8 +2333,16 @@ function escapeHtml(str) {
 // 검색어 강조: 원문 기준으로 잘라 각 조각을 이스케이프 (정규식은 렌더당 한 번)
 function buildHighlighter(tokens) {
   if (!tokens.length) return null;
-  const pattern = tokens.slice().sort((a, b) => b.length - a.length).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
-  return new RegExp(pattern, 'gi');
+  const esc = ch => ch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const gap = '[\\s\\-‐‑–—_.·]*';
+  const pats = new Set();
+  searchEngine(tokens).terms.forEach(a => {
+    if (a.exact) pats.add(esc(a.exact));
+    else pats.add([...a.c].map(esc).join(gap));
+  });
+  tokens.forEach(t => pats.add(esc(t)));
+  const list = [...pats].filter(Boolean).sort((a, b) => b.length - a.length);
+  try { return list.length ? new RegExp(list.join('|'), 'gi') : null; } catch (e) { return null; }
 }
 function hl(text, metrics) {
   const raw = String(text ?? '');
@@ -2031,12 +2359,15 @@ function hl(text, metrics) {
 }
 // 요지에서만 일치하면 그 부분을 한 줄 미리보기로
 function matchSnippet(p, metrics) {
-  if (!metrics.isSearching || !p.sum) return '';
-  const visible = [p.tk, p.t, p.au, p.jr, p.id].join(' ').toLowerCase();
-  if (metrics.tokens.every(t => visible.includes(t))) return '';
-  const low = p.sum.toLowerCase();
-  const pos = Math.min(...metrics.tokens.map(t => { const i = low.indexOf(t); return i < 0 ? Infinity : i; }));
-  if (!isFinite(pos)) return '';
+  if (!metrics.isSearching || !p.sum || !metrics.hl) return '';
+  const re = metrics.hl;
+  re.lastIndex = 0;
+  if (re.test([p.tk, p.t].join(' '))) { re.lastIndex = 0; return ''; }
+  re.lastIndex = 0;
+  const m = re.exec(p.sum);
+  re.lastIndex = 0;
+  if (!m) return '';
+  const pos = m.index;
   const a = Math.max(0, pos - 24), b = Math.min(p.sum.length, pos + 56);
   return (a ? '…' : '') + p.sum.slice(a, b) + (b < p.sum.length ? '…' : '');
 }
@@ -2046,8 +2377,14 @@ function renderHeaderAndFilters(metrics) {
   const banner = document.getElementById('searchBanner');
   const clearBtn = document.getElementById('searchClearBtn');
   banner.classList.toggle('active', metrics.isSearching);
-  banner.textContent = metrics.isSearching ? `검색 일치: ${metrics.totalMatched}편 / 전체 ${metrics.totalCount}편` : '';
+  const eng = metrics.engine;
+  banner.textContent = !metrics.isSearching ? '' : eng && eng.ai ? `AI 검색: ${metrics.totalMatched}편 / 전체 ${metrics.totalCount}편`
+    : eng && eng.partial ? `가장 가까운 논문: ${metrics.totalMatched}편 / 전체 ${metrics.totalCount}편` : `검색 일치: ${metrics.totalMatched}편 / 전체 ${metrics.totalCount}편`;
   clearBtn.classList.toggle('visible', metrics.isSearching);
+  // '관련도순'은 검색 중일 때만
+  const relOpt = document.querySelector('#sortOrder option[value="rel"]');
+  if (relOpt) relOpt.disabled = !metrics.isSearching;
+  if (!metrics.isSearching && STATE.sortOrder === 'rel') { STATE.sortOrder = 'yr_desc'; document.getElementById('sortOrder').value = 'yr_desc'; }
 
   const pjSelect = document.getElementById('filterPj');
   const pjList = Object.keys(metrics.pjCounts).sort((a, b) => metrics.pjCounts[b] - metrics.pjCounts[a] || a.localeCompare(b, 'ko'));
@@ -2349,6 +2686,12 @@ function applyView() {
   hideTip();
 }
 // 이름표 배치: 큰 것부터 자리를 잡고, 겹치면 짧은 이름 → 위쪽 자리 → 숨김 순으로 물러남
+// 대주제 이름표 자리가 꽉 찼을 때 둘러볼 자리: 중심 둘레 8방향 × 2겹(가까운 데부터)
+function ringSpots(sx, sy, w, h) {
+  const out = [];
+  [1.15, 1.9].forEach(m => { for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; out.push([sx + Math.cos(a) * (w / 2 + 10) * m - w / 2, sy + Math.sin(a) * (h + 10) * m - h / 2]); } });
+  return out;
+}
 function positionLabels() {
   const v = GRAPH.view, wrap = $id('graphWrap');
   const W = wrap.clientWidth, H = wrap.clientHeight;
@@ -2385,7 +2728,7 @@ function positionLabels() {
       const [w, h] = (L.size && L.size[lv]) || [80, 20];
       const cands = L.kind === 'l2'
         ? [[sx - w / 2, sy], [sx - w / 2, L.ytop * v.s + v.ty - h]]
-        : L.kind === 'l1' ? [[sx - w / 2, sy - h / 2], [sx - w / 2, sy - h * 1.5 - 6], [sx - w / 2, sy + h / 2 + 6], [sx - w - 10, sy - h / 2], [sx + 10, sy - h / 2]] : [[sx - w / 2, sy - h / 2]];
+        : L.kind === 'l1' ? [[sx - w / 2, sy - h / 2], [sx - w / 2, sy - h * 1.5 - 6], [sx - w / 2, sy + h / 2 + 6], [sx - w - 10, sy - h / 2], [sx + 10, sy - h / 2], ...ringSpots(sx, sy, w, h)] : [[sx - w / 2, sy - h / 2]];
       for (let [x, y] of cands) {
         // 화면 가장자리에 걸리면 안쪽으로 밀어 넣음(기준점이 화면 안일 때)
         if (sx > 0 && sx < W) x = Math.max(6, Math.min(W - w - 6, x));
@@ -2801,7 +3144,10 @@ function renderDrawer(metrics) {
   const badgeEl = document.getElementById('drawerBadge');
   const titleEl = document.getElementById('drawerTitle');
   let color = 'var(--accent-primary)';
-  if (node.type === 'ROOT') { badgeEl.textContent = '전체'; titleEl.textContent = '논문 DB 전체'; }
+  if (node.type === 'ROOT') {
+    badgeEl.textContent = metrics.isSearching ? (metrics.engine && metrics.engine.ai ? 'AI' : '검색') : '전체';
+    titleEl.textContent = metrics.isSearching ? (metrics.engine && metrics.engine.partial ? '검색 결과 (가장 가까운 순)' : '검색 결과') : '논문 DB 전체';
+  }
   else if (node.type === 'L1') { badgeEl.textContent = node.code; titleEl.textContent = L1BY[node.code] ? L1BY[node.code].name : node.code; color = `var(--c-${node.code})`; }
   else { const b = L2BY[node.code]; badgeEl.textContent = node.code; titleEl.textContent = b ? b.name : node.code; if (b) color = `var(--c-${b.l1})`; }
   // 작은 글자는 주제색 그대로 쓰지 않고 배경 옅게 + 글자 진하게(라이트·다크 모두 대비 확보)
@@ -2846,6 +3192,137 @@ function renderDrawer(metrics) {
     (list.length > STATE.pageLimit ? `<button type="button" class="load-more-btn" id="loadMoreBtn">더 보기 (${visible.length} / ${list.length}편)</button>` : '');
 }
 
+/* ---------- 6-2. 검색 바로 보기: 치는 동안 위쪽에 결과 8편, Enter면 전체 결과 목록 ---------- */
+const SEARCH_POP = { open: false, active: -1, items: [], total: 0, nav: false, aiBusy: false, aiMsg: '' };
+function renderSearchPop(metrics) {
+  const pop = document.getElementById('searchPop');
+  const input = document.getElementById('searchInput');
+  if (!pop) return;
+  if (STATE.selectedNode) SEARCH_POP.open = false; // 목록 패널이 열리면 미리보기는 닫음(패널을 닫아도 다시 안 뜸)
+  const show = SEARCH_POP.open && metrics.isSearching;
+  if (!show) {
+    pop.hidden = true; SEARCH_POP.items = []; SEARCH_POP.active = -1;
+    input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant');
+    return;
+  }
+  const all = PAPERS.filter(p => matchesSearch(p, metrics.tokens) && matchesFilters(p));
+  const sc = new Map(all.map(p => [p, scorePaper(p, metrics.tokens)]));
+  all.sort((a, b) => sc.get(b) - sc.get(a) || a.id.localeCompare(b.id));
+  SEARCH_POP.items = all.slice(0, 8);
+  SEARCH_POP.total = all.length;
+  if (SEARCH_POP.active >= SEARCH_POP.items.length) SEARCH_POP.active = SEARCH_POP.items.length - 1;
+  const eng = metrics.engine || {};
+  const words = eng.concepts ? eng.concepts.map(k => k.label) : [];
+  const headTxt = eng.ai ? `AI가 넓힌 말로 ${all.length}편` : eng.partial ? `모든 말이 다 든 논문은 없어 가장 가까운 ${all.length}편` : `${all.length}편 일치`;
+  const aiRow = eng.ai
+    ? `<div class="sp-ai-on"><span>AI 검색: ${escapeHtml(eng.concepts.map(k => k.alts.slice(0, 4).map(a => a.c || a.exact).join('·')).join(' + ')).slice(0, 140)}</span><button type="button" class="sp-all-mini" data-sp="noai">원래대로</button></div>`
+    : `<button type="button" class="sp-ai" data-sp="ai"${SEARCH_POP.aiBusy ? ' disabled' : ''}>${SEARCH_POP.aiBusy ? 'AI가 검색어를 넓히는 중…' : '✦ AI로 넓혀 찾기 — 뜻이 같은 한·영 표현까지'}</button>`;
+  const aiMsg = SEARCH_POP.aiMsg ? `<div class="sp-ai-msg">${escapeHtml(SEARCH_POP.aiMsg)}</div>` : '';
+  pop.innerHTML = all.length
+    ? `<div class="sp-head"><span>${escapeHtml(headTxt)}<span class="sp-keys"> · ↑↓로 고르고 Enter</span></span><button type="button" class="sp-all-mini" data-sp="all">모두 보기 ›</button></div>` + aiRow + aiMsg +
+      SEARCH_POP.items.map((p, i) => {
+        const sub = [p.yr || '', p.au ? hl(p.au, metrics) : '', escapeHtml(p.l2 ? `${p.l2} ${L2BY[p.l2] ? L2BY[p.l2].name : ''}` : (L1BY[p.l1] ? L1BY[p.l1].name : p.l1))].filter(Boolean).join(' · ');
+        return `<button type="button" class="sp-item${i === SEARCH_POP.active ? ' active' : ''}" role="option" id="sp-${i}" data-sp="${i}" aria-selected="${i === SEARCH_POP.active}" style="--c: var(--c-${escapeHtml(p.l1)})">
+          <span class="sp-dot" aria-hidden="true"></span>
+          <span class="sp-main"><span class="sp-tk">${hl(p.tk, metrics)}</span>${p.t ? `<span class="sp-t">${hl(p.t, metrics)}</span>` : ''}<span class="sp-sub">${sub}</span></span>
+        </button>`;
+      }).join('') +
+      `<button type="button" class="sp-all${SEARCH_POP.active === -1 ? ' active' : ''}" data-sp="all" role="option" id="sp-all">결과 ${all.length}편 모두 목록으로 보기 <kbd>Enter</kbd></button>`
+    : `<div class="sp-empty">'${escapeHtml(words.join(' '))}'와 맞는 논문을 못 찾았습니다</div>` + aiRow + aiMsg;
+  pop.hidden = false;
+  input.setAttribute('aria-expanded', 'true');
+  input.setAttribute('aria-activedescendant', SEARCH_POP.active >= 0 ? 'sp-' + SEARCH_POP.active : 'sp-all');
+  // 목록 안에서만 스크롤(화면 전체는 안 움직임): 새로 칠 때는 맨 위, 화살표로 고를 때는 고른 줄이 보이게
+  if (!SEARCH_POP.nav) { pop.scrollTop = 0; return; }
+  const act = pop.querySelector('.active');
+  if (!act) return;
+  const top = act.offsetTop, bot = top + act.offsetHeight;
+  if (top < pop.scrollTop) pop.scrollTop = Math.max(0, top - 6);
+  else if (bot > pop.scrollTop + pop.clientHeight) pop.scrollTop = bot - pop.clientHeight + 6;
+}
+// AI로 넓히기: claude.ai 판은 구독(sample), 설치형은 같은 기기 PaperSide 앱의 API 키로
+function parseLooseJsonMap(t) {
+  const s = String(t || ''); const a = s.indexOf('{'), b = s.lastIndexOf('}');
+  if (a < 0 || b <= a) throw new Error('no json');
+  return JSON.parse(s.slice(a, b + 1));
+}
+async function aiExpand(q) {
+  const topics = [...TAX.L1.map(a => `${a.code} ${a.name}`), ...TAX.L2.map(b => `${b.code} ${b.name}`)].join('\n');
+  const prompt = `트라이볼로지(마찰·마모·침식·부식·코팅) 논문 DB를 검색한다. 논문마다 한국어 번역 제목, 영어 원제목, 한국어 키워드·요지가 있다.
+검색어: "${q}"
+할 일: 검색어를 뜻 단위 개념 1~4개로 나누고, 개념마다 같은 뜻의 한국어·영어 표현, 약어, 철자·음역 변형, 아주 가까운 하위 용어를 4~12개 적는다(예: 3바디 → 3-body, three-body, 삼체, third-body). 검색어가 틀리게 쓰였으면 바로잡은 말도 넣는다. 개념마다 관련 깊은 주제 코드를 아래 목록에서 0~3개 고른다.
+주제 목록:
+${topics}
+JSON 하나만 출력: {"concepts":[{"label":"개념 이름","terms":["…"],"topics":["A1"]}]}`;
+  let data = null;
+  if (window.claude && typeof window.claude.use === 'function') {
+    const sample = await window.claude.use('sample').catch(() => null);
+    if (sample) data = await sample.json(prompt, { modelTier: 'quick' });
+  }
+  if (!data) {
+    let set = null;
+    try { set = JSON.parse(localStorage.getItem('ps:settings') || 'null'); } catch (e) { set = null; }
+    const key = set && set.apiKey;
+    if (!key) throw { code: 'no_ai' };
+    const model = (set.models && set.models.quick) || 'claude-haiku-5-5';
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      body: JSON.stringify({ model, max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
+    });
+    if (!r.ok) throw { code: r.status === 401 ? 'bad_key' : 'api_error', status: r.status };
+    const j = await r.json();
+    data = parseLooseJsonMap((j.content || []).map(b => b.text || '').join(''));
+  }
+  const codes = new Set([...TAX.L1.map(a => a.code), ...TAX.L2.map(b => b.code)]);
+  const concepts = (Array.isArray(data && data.concepts) ? data.concepts : []).slice(0, 4).map(c => ({
+    label: String(c.label || '').slice(0, 40),
+    terms: (Array.isArray(c.terms) ? c.terms : []).map(t => String(t).slice(0, 60)).filter(Boolean).slice(0, 15),
+    topics: (Array.isArray(c.topics) ? c.topics : []).map(String).filter(t => codes.has(t)).slice(0, 3)
+  })).filter(c => c.terms.length);
+  if (!concepts.length) throw { code: 'empty' };
+  return concepts;
+}
+const AI_FAIL = {
+  no_ai: 'AI 검색은 claude.ai 판 지도에서 되고, 설치형 앱에서는 같은 기기 PaperSide 앱 설정에 Claude API 키를 넣으면 됩니다',
+  bad_key: 'PaperSide 앱에 넣은 API 키가 맞지 않습니다', not_granted: 'Claude 사용을 허용하지 않아 AI 검색을 못 했습니다',
+  rate_limited: 'AI 요청이 많아 잠시 뒤 다시 눌러 주세요', empty: 'AI가 넓힐 말을 찾지 못했습니다'
+};
+async function runAiSearch() {
+  const q = getSearchTokens(STATE.searchQuery).join(' ');
+  if (!q || SEARCH_POP.aiBusy) return;
+  SEARCH_POP.aiBusy = true; SEARCH_POP.aiMsg = '';
+  renderSearchPop(computeMetrics());
+  try {
+    const concepts = await aiExpand(q);
+    if (getSearchTokens(STATE.searchQuery).join(' ') === q) { STATE.ai = { q, concepts }; METRICS_CACHE.key = null; }
+  } catch (e) {
+    SEARCH_POP.aiMsg = AI_FAIL[e && e.code] || 'AI 검색 실패 — 잠시 뒤 다시 눌러 주세요';
+  } finally {
+    SEARCH_POP.aiBusy = false;
+    SEARCH_POP.open = true;
+    render({ keepFocus: true });
+  }
+}
+function closeSearchPop() {
+  if (!SEARCH_POP.open) return;
+  SEARCH_POP.open = false; SEARCH_POP.active = -1;
+  renderSearchPop(computeMetrics());
+}
+// 검색 결과 전체를 목록 패널로(관련도순)
+function openSearchResults() {
+  SEARCH_POP.open = false; SEARCH_POP.active = -1;
+  STATE.sortOrder = 'rel';
+  document.getElementById('sortOrder').value = 'rel';
+  selectNode('ROOT', 'ROOT');
+}
+function openSearchItem(i) {
+  const p = SEARCH_POP.items[i];
+  if (!p) return;
+  SEARCH_POP.open = false; SEARCH_POP.active = -1;
+  openPaper(PAPERS.indexOf(p));
+}
+
 /* ---------- 7. 전체 그리기와 초점 ---------- */
 let DRAWER_WAS_OPEN = false;
 let LAST_TRIGGER = '';
@@ -2855,6 +3332,7 @@ function render(opts) {
   renderHeaderAndFilters(metrics);
   renderGraph(metrics);
   renderDrawer(metrics);
+  renderSearchPop(metrics);
   const isOpen = !!STATE.selectedNode;
   if (isOpen) {
     // 연 순간 초점이 있던 이름표·목록 줄을 기억(닫을 때 그 자리로 복귀)
@@ -2913,6 +3391,8 @@ function applyHash() {
 /* ---------- 9. 조작 ---------- */
 // 가지 선택: 목록 패널을 열고 그래프 시점을 그 가지로
 function selectNode(type, code) {
+  // 검색 중에 목록을 열면 정렬을 직접 바꾸지 않은 한 관련도순
+  if (getSearchTokens(STATE.searchQuery).length && !STATE.sortUser && STATE.sortOrder !== 'rel') { STATE.sortOrder = 'rel'; document.getElementById('sortOrder').value = 'rel'; }
   rememberView();
   STATE.selectedNode = { type, code };
   STATE.pageLimit = 60;
@@ -2926,13 +3406,57 @@ function setupEvents() {
   setupGraphEvents();
 
   const searchInput = document.getElementById('searchInput');
+  // 검색창 안내: 똑똑한 검색(한·영·띄어쓰기 상관없음)
+  const setPh = () => { searchInput.placeholder = window.matchMedia('(max-width: 600px)').matches ? '논문 검색 · 한글·영어 다 돼요' : '제목·저자·키워드·요지 검색 — 한글·영어, 띄어쓰기 상관없이'; };
+  setPh(); window.matchMedia('(max-width: 600px)').addEventListener('change', setPh);
   let timer = 0;
   searchInput.addEventListener('input', e => {
     clearTimeout(timer);
+    SEARCH_POP.open = true; SEARCH_POP.active = -1; SEARCH_POP.nav = false; SEARCH_POP.aiMsg = '';
     timer = setTimeout(() => { STATE.searchQuery = e.target.value; STATE.pageLimit = 60; render({ keepFocus: true }); }, 120);
+  });
+  // 결과 미리보기 조작: ↑↓ 고르기, Enter 열기(아무것도 안 골랐으면 전체 목록), Esc 닫기
+  searchInput.addEventListener('keydown', e => {
+    const flush = () => { if (STATE.searchQuery !== searchInput.value) { clearTimeout(timer); STATE.searchQuery = searchInput.value; STATE.pageLimit = 60; render({ keepFocus: true }); } };
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      if (!searchInput.value.trim()) return;
+      e.preventDefault();
+      flush();
+      if (!SEARCH_POP.open) { SEARCH_POP.open = true; SEARCH_POP.active = -1; SEARCH_POP.nav = false; }
+      else {
+        SEARCH_POP.nav = true;
+        const n = SEARCH_POP.items.length;
+        if (n) SEARCH_POP.active = e.key === 'ArrowDown' ? (SEARCH_POP.active + 2) % (n + 1) - 1 : (SEARCH_POP.active + n + 1) % (n + 1) - 1;
+      }
+      renderSearchPop(computeMetrics());
+    } else if (e.key === 'Enter') {
+      if (e.isComposing || e.keyCode === 229) return; // 한글 조합 중 Enter는 글자 확정용
+      if (!searchInput.value.trim()) return;
+      e.preventDefault();
+      flush();
+      if (SEARCH_POP.active >= 0 && SEARCH_POP.items[SEARCH_POP.active]) openSearchItem(SEARCH_POP.active);
+      else if (computeMetrics().totalMatched) openSearchResults();
+    } else if (e.key === 'Escape' && SEARCH_POP.open && searchInput.value.trim()) {
+      e.preventDefault(); e.stopPropagation();
+      closeSearchPop();
+    }
+  });
+  searchInput.addEventListener('focus', () => { if (searchInput.value.trim() && !STATE.selectedNode) { SEARCH_POP.open = true; renderSearchPop(computeMetrics()); } });
+  searchInput.addEventListener('blur', () => { setTimeout(() => { if (document.activeElement !== searchInput) closeSearchPop(); }, 150); });
+  const pop = document.getElementById('searchPop');
+  pop.addEventListener('mousedown', e => e.preventDefault()); // 누르는 동안 검색창 초점 유지
+  pop.addEventListener('click', e => {
+    const b = e.target.closest('[data-sp]');
+    if (!b) return;
+    const v = b.getAttribute('data-sp');
+    if (v === 'all') openSearchResults();
+    else if (v === 'ai') runAiSearch();
+    else if (v === 'noai') { STATE.ai = null; SEARCH_POP.aiMsg = ''; METRICS_CACHE.key = null; render({ keepFocus: true }); }
+    else openSearchItem(+v);
   });
   document.getElementById('searchClearBtn').addEventListener('click', () => {
     searchInput.value = ''; STATE.searchQuery = ''; STATE.pageLimit = 60;
+    SEARCH_POP.open = false;
     render({ keepFocus: true }); searchInput.focus();
   });
 
@@ -2944,7 +3468,7 @@ function setupEvents() {
   const redrawDrawer = () => { STATE.pageLimit = 60; const m = computeMetrics(); renderDrawer(m); updateGraphState(m); };
   document.getElementById('filterPj').addEventListener('change', e => { STATE.filterPj = e.target.value; redrawDrawer(); });
   document.getElementById('filterDt').addEventListener('change', e => { STATE.filterDt = e.target.value; redrawDrawer(); });
-  document.getElementById('sortOrder').addEventListener('change', e => { STATE.sortOrder = e.target.value; redrawDrawer(); });
+  document.getElementById('sortOrder').addEventListener('change', e => { STATE.sortOrder = e.target.value; STATE.sortUser = true; redrawDrawer(); });
 
   document.getElementById('drawerBody').addEventListener('click', e => {
     const toggle = e.target.closest('[data-toggle-paper]');
@@ -3044,6 +3568,14 @@ function setStatus(state, text) {
   }
   const dot = document.querySelector('.status-dot');
   if (dot) dot.setAttribute('data-state', state);
+  // 폰: 제목 아래 한 줄(편수 · 상태 짧게)
+  const sub = document.getElementById('brandSub');
+  if (sub) {
+    const short = text.replace('저장본 표시 중', '저장본').replace('최근 추가 ', '').replace(/\b20(\d\d)-(\d\d)-(\d\d)\b/, '$2.$3 추가');
+    sub.textContent = (PAPERS.length ? PAPERS.length + '편 · ' : '') + short;
+    sub.title = text;
+    sub.classList.toggle('warn', failing);
+  }
 }
 function snapLabel() {
   let latest = '';
@@ -5653,6 +6185,15 @@ return qrcode;
   async function start() {
     setupLock();
     if ('serviceWorker' in navigator && window.isSecureContext) {
+      // 새 버전이 올라와 있으면: 앱을 연 직후(몇 초 안)라면 바로 새로 열고, 쓰는 중이면 '다시 읽기'로 적용하게 안내
+      var hadController = !!navigator.serviceWorker.controller, t0 = Date.now(), swapped = false;
+      navigator.serviceWorker.addEventListener('controllerchange', function () {
+        if (!hadController || swapped) return;
+        swapped = true;
+        if (Date.now() - t0 < 10000 && !document.querySelector('.paper-drawer.open')) { location.reload(); return; }
+        try { setStatus('busy', '새 버전 받음 · 다시 읽기를 누르면 적용'); } catch (e) { /* 지도 시작 전 */ }
+        PM.v = 'stale';
+      });
       navigator.serviceWorker.register('./sw.js').catch(function (e) { console.warn('sw', e); });
     }
     var k = keyFrom(location.hash);
